@@ -3,6 +3,7 @@ import Typed from 'react-typed';
 import {Nominations} from './Nominations'
 import {Results} from './Results'
 import '../index.css';
+import Banner from 'react-js-banner';
 
 
 export class OMDbPortal extends React.Component {
@@ -14,7 +15,8 @@ export class OMDbPortal extends React.Component {
           searchRender: "",
           searchResults: {},
           nominationsList: [],
-          searchMade: false
+          searchMade: false,
+          bannerShow: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.searchOMDb = this.searchOMDb.bind(this);
@@ -27,23 +29,32 @@ export class OMDbPortal extends React.Component {
     }
   
     searchOMDb = async (searchRender) =>  {
-      const response = await fetch('http://www.omdbapi.com/?i=tt3896198&apikey=686c061&s=' + searchRender);
-      const jsonData = await response.json();
-      this.state.searchResults = jsonData;
-      this.setState({
-        searchResults: this.state.searchResults,
-        searchMade: true,
-        searchPrompt: searchRender
-      });
+      if (this.state.searchRender == "") {
+        window.alert("Enter a movie title :)!");
+      } else {
+        const response = await fetch('http://www.omdbapi.com/?i=tt3896198&apikey=686c061&s=' + searchRender);
+        const jsonData = await response.json();
+        this.state.searchResults = jsonData;
+        this.setState({
+          searchResults: this.state.searchResults,
+          searchMade: true,
+          searchPrompt: searchRender
+        });
+        console.log("This was made 2");
+      }
     }
   
     addNomination(index) {
-      var nominationsListUpdated = this.state.nominationsList;
-      nominationsListUpdated.push(this.state.searchResults.Search[index]);
-      this.setState({
-        nominationsList: nominationsListUpdated
-      });
-      console.log(nominationsListUpdated);
+      if (this.state.nominationsList.length == 5) {
+        window.alert("You can only have 5 nominations! ;)")
+      } else {
+        var nominationsListUpdated = this.state.nominationsList;
+        nominationsListUpdated.push(this.state.searchResults.Search[index]);
+        this.setState({
+          nominationsList: nominationsListUpdated
+        });
+        console.log(nominationsListUpdated);
+      }
     }
   
     removeNomination(index) {
@@ -52,9 +63,7 @@ export class OMDbPortal extends React.Component {
       });
       this.setState({
         nominationsList: nominationsListUpdated
-      });
-
-  
+      });  
     }
   
     // Note to self: I feel like the render should not be in this class component.

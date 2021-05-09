@@ -2,14 +2,12 @@ import React from 'react';
 import '../index.css';
 
 function checkNominations(nominationsList, imdbID) {
-
   for (let i = 0 ; i < nominationsList.length ; i++) {
     if (nominationsList[i].imdbID === imdbID) {
       return true;
     }
   }
   return false;
-
 }
 
 export function Results(props) {
@@ -23,11 +21,10 @@ export function Results(props) {
           <p> Results for "{searchPrompt}":</p>
           <ul>
             {Object.keys(resultsList.Search).map((movie, key) => {
-              return(<li> <img src={resultsList.Search[key].Poster} alt='movie' style={{height: "200px"}}></img> {resultsList.Search[key].Title} ({resultsList.Search[key].Year}) 
+              return(<li> <img src={resultsList.Search[key].Poster} alt='movie' style={{height: "200px"}}></img> <br/> {resultsList.Search[key].Title} ({resultsList.Search[key].Year}) <br/>
               {checkNominations(nominationsList, resultsList.Search[key].imdbID) ?
                 <button disabled={true}>Nominate</button>
               :
-              // {!props.nominationsList[resultsList.Search[key].imdbID] &&
                 <button onClick={() => props.onClick(key)}>Nominate</button>
               }
                 </li>)
