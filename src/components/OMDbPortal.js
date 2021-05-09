@@ -39,7 +39,7 @@ export class OMDbPortal extends React.Component {
       if (this.state.searchRender == "") {
         window.alert("Enter a movie title :)!");
       } else {
-        const response = await fetch('http://www.omdbapi.com/?i=tt3896198&apikey=686c061&s=' + searchRender);
+        const response = await fetch('https://www.omdbapi.com/?i=tt3896198&apikey=686c061&s=' + searchRender);
         const jsonData = await response.json();
         this.state.searchResults = jsonData;
         this.setState({
