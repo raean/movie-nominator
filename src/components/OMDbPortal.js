@@ -13,7 +13,7 @@ export class OMDbPortal extends React.Component {
           searchPrompt: "",
           searchRender: "",
           searchResults: {},
-          nominationsList: {},
+          nominationsList: [],
           searchMade: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -37,20 +37,24 @@ export class OMDbPortal extends React.Component {
       });
     }
   
-    addNomination(imdbID) {
+    addNomination(index) {
       var nominationsListUpdated = this.state.nominationsList;
-      nominationsListUpdated[imdbID] = true;
+      nominationsListUpdated.push(this.state.searchResults.Search[index]);
       this.setState({
         nominationsList: nominationsListUpdated
       });
+      console.log(nominationsListUpdated);
     }
   
-    removeNomination(imdbID) {
-      var nominationsListUpdated = this.state.nominationsList;
-      delete nominationsListUpdated[imdbID];
+    removeNomination(index) {
+      var nominationsListUpdated = this.state.nominationsList.filter(function (item, key) {
+        return key != index;
+      });
       this.setState({
         nominationsList: nominationsListUpdated
       });
+
+  
     }
   
     // Note to self: I feel like the render should not be in this class component.
@@ -78,7 +82,7 @@ export class OMDbPortal extends React.Component {
           </div>
           <div className="ResultsBar">
             {this.state.searchMade && 
-            <Results searchResults={this.state.searchResults} searchPrompt={this.state.searchPrompt} onClick={(imdbID) => this.addNomination(imdbID)} nominationsList={this.state.nominationsList}/>
+            <Results nominationsList={this.state.nominationsList} searchResults={this.state.searchResults} searchPrompt={this.state.searchPrompt} onClick={(imdbID, index) => this.addNomination(imdbID, index)} nominationsList={this.state.nominationsList}/>
             }
           </div>
           <div className="NominationsBar">

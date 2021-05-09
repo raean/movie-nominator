@@ -5,24 +5,20 @@ import '../index.css';
 export function Nominations(props) {
 
     const nominationsList = props.nominationsList;
-    const resultsList = props.searchResults;
+
     return (
     <div>
     <p>Your Nominations:</p>
-    {Object.keys(resultsList.Search).map((movie, key) => {
+    <ul> 
+    {nominationsList.map((movie, key) => {
             return(
-
-            <ul>                
-            {nominationsList[resultsList.Search[key].imdbID] &&
                 <li>
-                    <img src={resultsList.Search[key].Poster} alt='movie' style={{height: "200px"}}></img> {resultsList.Search[key].Title} ({resultsList.Search[key].Year}) 
-                    <button onClick={() => props.onClick(resultsList.Search[key].imdbID)}>Remove</button>
+                    <img src={movie.Poster} alt='movie' style={{height: "200px"}}></img> {movie.Title} ({movie.Year}) 
+                    <button onClick={() => props.onClick(key)}>Remove</button>
                 </li>
-                }
-                </ul>
             )
             })}
-        
+    </ul>
     </div>
     )
 }
