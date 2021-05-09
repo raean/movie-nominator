@@ -5,9 +5,46 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #22201F;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+.ResultsBar {
+  padding-left: 20px;
+  float: left;
+}
+
+.NominationsBar {
+  float: left;
+  padding-left: 40px;
+  background-color: ;
+}
+
+button {
+  border-radius: 8px;
+  border-color: #FFC300;
+  background-color: #FFC300;
+}
+
+button:disabled {
+  border-radius: 8px;
+  border-color: grey;
+  background-color: grey;
+  color: black;
+}
+
+.Portal {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.TypedInputBar {
+  color: blue;
 }
