@@ -1,7 +1,9 @@
 import React from 'react';
 import '../index.css';
 
-
+/**
+ * Renders the Nominations components which provides a list of the nominated movies found, their title, their year released, their poster as well as a button to remove the movie from their nominations list.
+ */
 export function Nominations(props) {
 
     const nominationsList = props.nominationsList;

@@ -5,29 +5,36 @@ import {Results} from './Results'
 import '../index.css';
 import Banner from 'react-js-banner';
 
-
+/**
+ * This class is the main parent class that renders the Results, Nominations and the search bar. It also holds the state variables and is responsible for updating the list of search results as well as the nomination results.
+ */
 export class OMDbPortal extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          searchPrompt: "",
-          searchRender: "",
-          searchResults: {},
-          nominationsList: [],
-          searchMade: false,
-          bannerShow: false
+          searchPrompt: "", // Holds the user's search prompt after making the search (static).
+          searchRender: "", // Holds the user's search prompt while making the search (dynamically changed).
+          searchResults: {}, // Retrieves the JSON response from the OMDb API.
+          nominationsList: [], // Holds each movie's JSON object that gets nominated by the user.
+          searchMade: false, // checks if the user has made a search.
         };
         this.handleChange = this.handleChange.bind(this);
         this.searchOMDb = this.searchOMDb.bind(this);
       }
     
+    /**
+     * Handles the change in value of the search bar's input.
+     */
     handleChange(value) {
       this.setState({
         searchRender: value
       });
     }
   
+    /**
+     * Asychronously fetches the JSON response based on the user's input and retrieves back the list of movies. This also updates the state's search prompt and the boolean value to notify the portal that a search was made.
+     */
     searchOMDb = async (searchRender) =>  {
       if (this.state.searchRender == "") {
         window.alert("Enter a movie title :)!");
@@ -44,6 +51,9 @@ export class OMDbPortal extends React.Component {
       }
     }
   
+    /**
+     * Adds the movie's JSON object if it is nominated based on the index of the search results and updates the state.
+     */
     addNomination(index) {
       if (this.state.nominationsList.length == 5) {
         window.alert("You can only have 5 nominations! ;)")
@@ -57,6 +67,9 @@ export class OMDbPortal extends React.Component {
       }
     }
   
+    /**
+     * Removes the movie's JSON object from the nominations list and updates the state.
+     */
     removeNomination(index) {
       var nominationsListUpdated = this.state.nominationsList.filter(function (item, key) {
         return key != index;
@@ -66,7 +79,6 @@ export class OMDbPortal extends React.Component {
       });  
     }
   
-    // Note to self: I feel like the render should not be in this class component.
     render() {
       return (
       <div className="Portal"> 

@@ -1,6 +1,9 @@
 import React from 'react';
 import '../index.css';
 
+/**
+ * Checks if the movie exists in the list of nominations and returns a boolean value.
+ */
 function checkNominations(nominationsList, imdbID) {
   for (let i = 0 ; i < nominationsList.length ; i++) {
     if (nominationsList[i].imdbID === imdbID) {
@@ -10,6 +13,9 @@ function checkNominations(nominationsList, imdbID) {
   return false;
 }
 
+/**
+ * Renders the Results components which provides a list of the movies found, their title, their year released, their poster as well as a button to nominate the movie.
+ */
 export function Results(props) {
 
     const resultsList= props.searchResults;
