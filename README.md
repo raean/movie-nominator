@@ -1,6 +1,6 @@
 ## The Shoppies! (Movie Nominator Application) 
 
-#### You can find my demo of the web application here: www.raeabunahla.com/movie-nominator.
+#### You can find my demo of the web application here: https://raeabunahla.com/movie-nominator/
 
 ### Requirements:
 Within this application, you will find an interface:
